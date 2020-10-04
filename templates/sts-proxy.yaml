@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-proxy
+  labels:
+    smartnode: proxy
+    {{- include "rocketpool.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      smartnode: proxy
+      {{- include "rocketpool.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "rocketpool.fullname" . }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        smartnode: proxy
+        {{- include "rocketpool.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-proxy
+          image: "{{ .Values.image.repository }}-pow-proxy:{{ .Values.image.tag }}"
+          command: [ "/go/bin/rocketpool-pow-proxy" ]
+          args: [ "--port 8545 --network goerli --projectId $INFURA_PROJECT_ID" ]
+          env:
+          - name: INFURA_PROJECT_ID
+            valueFrom:
+              secretKeyRef:
+                name: rocketpool-infura-id
+                key: infura-id
+          resources: 
+{{ toYaml .Values.resources | indent 12 }}
+          # livenessProbe:
+          #   httpGet:
+          #     path: /node/health
+          #     port: {{ .Values.ports.metrics }}
+          #   failureThreshold: 60
+          #   initialDelaySeconds: 600
+          #   periodSeconds: 60
+          #   timeoutSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /node/health
+          #     port: {{ .Values.ports.metrics }}
+          #   failureThreshold: 3
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          ports:
+            - name: proxy
+              containerPort: 8545
