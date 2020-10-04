@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "rocketpool.fullname" . }}-data
 spec:
-  storageClassName: efs
+  storageClassName: aws-efs
   accessModes: 
     - ReadWriteMany
   resources:
