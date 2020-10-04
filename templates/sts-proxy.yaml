@@ -22,7 +22,13 @@ spec:
         - name: {{ .Chart.Name }}-proxy
           image: "{{ .Values.image.repository }}-pow-proxy:{{ .Values.image.tag }}"
           command: [ "/go/bin/rocketpool-pow-proxy" ]
-          args: [ "--port 8545 --network goerli --projectId $INFURA_PROJECT_ID" ]
+          args:
+            - --port
+            - "8545"
+            - --network
+            - goerli
+            - --projectId
+            - $(INFURA_PROJECT_ID)
           env:
           - name: INFURA_PROJECT_ID
             valueFrom:
