@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-api
+  labels:
+    smartnode: api
+    {{- include "rocketpool.labels" . | nindent 4 }}
+spec:
+  selector:
+    smartnode: api
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      port: {{ .Values.ports.metrics }}
+      protocol: TCP

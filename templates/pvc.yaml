@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-data
+spec:
+  accessModes: 
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.storage.capacity | quote }}
