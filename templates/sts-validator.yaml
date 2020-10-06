@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-validator
+  labels:
+    smartnode: validator
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      smartnode: validator
+      {{- include "rocketpool.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "rocketpool.fullname" . }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        smartnode: validator
+        {{- include "rocketpool.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-validator
+          image: "{{ .Values.validator.image.repository }}:{{ .Values.validator.image.tag }}"
+          {{- if .Values.validator.container.command }}
+          command:
+{{ toYaml .Values.validator.container.command | indent 12 }}
+          {{- end }}
+          {{- if .Values.validator.container.args }}
+          args:
+{{ toYaml .Values.validator.container.args | indent 12 }}
+          {{- end }}
+          resources: 
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /rocketpool
+          ports:
+            - name: metrics
+              containerPort: 5052
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "rocketpool.fullname" . }}-data

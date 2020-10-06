@@ -1,3 +1,23 @@
+validator:
+  image:
+    repository: sigp/lighthouse
+    tag: latest
+
+  container:
+    command:
+      - lighthouse
+      - validator_client
+    args:
+      - --datadir
+      - /rocketpool/data/validators/lighthouse
+      - --debug-level
+      - info
+      - --testnet
+      - medalla
+      - --server
+      - http://lighthouse-beacon:5052
+      - --graffiti
+      - Lighthouse Validator
 
 replicaCount: 1
 
