@@ -33,7 +33,7 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: data
-              mountPath: /data
+              mountPath: {{ .Values.datadir }}
           ports:
             - name: metrics
               containerPort: 5052

@@ -43,12 +43,12 @@ spec:
           #   timeoutSeconds: 5
           volumeMounts:
             - name: data
-              mountPath: /.rocketpool
+              mountPath: {{ .Values.datadir }}
             - name: config
-              mountPath: /.rocketpool/config.yml
+              mountPath: {{ .Values.datadir }}/config.yml
               subPath: config.yml
             - name: settings
-              mountPath: /.rocketpool/settings.yml
+              mountPath: {{ .Values.datadir }}/settings.yml
               subPath: settings.yml
           ports:
             - name: metrics
