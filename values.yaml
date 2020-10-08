@@ -6,7 +6,7 @@ image:
 
 storageAddress: 0xbbCbc87447fE120E1Bc73dBd11bc4Dc1086FFa25
 
-datadir: /data
+datadir: /.rocketpool
 
 eth1:
   provider: http://eth1:8545
@@ -38,18 +38,6 @@ validator:
     tag: v0.2.13
     pullPolicy: IfNotPresent
 
-  container:
-    command:
-      - lighthouse
-      - validator_client
-    args:
-      - --datadir
-      - /data/validators/lighthouse
-      - --debug-level
-      - info
-      - --testnet
-      - medalla
-      - --server
-      - http://lighthouse-beacon:5052
-      - --graffiti
-      - Lighthouse Validator
+  debugLevel: info
+  testnet: medalla
+  graffiti: Lighthouse Validator

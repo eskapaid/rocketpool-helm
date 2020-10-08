@@ -21,14 +21,20 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-validator
           image: "{{ .Values.validator.image.repository }}:{{ .Values.validator.image.tag }}"
-          {{- if .Values.validator.container.command }}
           command:
-{{ toYaml .Values.validator.container.command | indent 12 }}
-          {{- end }}
-          {{- if .Values.validator.container.args }}
+            - lighthouse
+            - validator_client
           args:
-{{ toYaml .Values.validator.container.args | indent 12 }}
-          {{- end }}
+            - --datadir
+            - {{ .Values.datadir }}/validators/lighthouse
+            - --debug-level
+            - {{ .Values.validator.debugLevel }}
+            - --testnet
+            - {{ .Values.validator.testnet }}
+            - --server
+            - {{ .Values.eth2.provider }}
+            - --graffiti
+            - {{ .Values.validator.graffiti }}
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
