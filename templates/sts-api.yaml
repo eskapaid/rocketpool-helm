@@ -11,7 +11,7 @@ spec:
       smartnode: api
       {{- include "rocketpool.selectorLabels" . | nindent 6 }}
   serviceName: {{ include "rocketpool.fullname" . }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   template:
     metadata:
       labels:

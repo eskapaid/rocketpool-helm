@@ -1,3 +1,4 @@
+{{- if .Values.eth1.proxy }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -11,7 +12,7 @@ spec:
       smartnode: proxy
       {{- include "rocketpool.selectorLabels" . | nindent 6 }}
   serviceName: {{ include "rocketpool.fullname" . }}
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   template:
     metadata:
       labels:
@@ -56,3 +57,4 @@ spec:
           ports:
             - name: proxy
               containerPort: 8545
+{{- end }}

@@ -1,9 +1,16 @@
-{{- if .Values.config }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "rocketpool.fullname" . }}-settings
 data:
   settings.yml: |
-{{ toYaml .Values.settings | indent 4 }}
-{{- end }}
+    chains:
+      eth1:
+        client:
+          selected: infura
+          params:
+          - env: INFURA_PROJECT_ID
+            value: {{ .Values.eth1.infuraId }}
+      eth2:
+        client:
+          selected: lighthouse
