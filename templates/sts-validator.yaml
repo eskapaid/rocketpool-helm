@@ -27,6 +27,8 @@ spec:
           args:
             - --datadir
             - {{ .Values.datadir }}/validators/lighthouse
+            - --secrets-dir
+            - {{ .Values.datadir }}/validators/lighthouse/secrets
             - --debug-level
             - {{ .Values.validator.debugLevel }}
             - --testnet
