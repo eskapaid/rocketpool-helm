@@ -33,7 +33,7 @@ spec:
             - --p2p-udp-port
             - {{ .Values.prysm.udpPort }}
             - --monitoring-host
-            - 0.0.0.0
+            - "0.0.0.0"
             - --monitoring-port
             - {{ .Values.prysm.monitoringPort }}
             - --verbosity
