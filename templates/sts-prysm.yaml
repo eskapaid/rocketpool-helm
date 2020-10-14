@@ -24,14 +24,12 @@ spec:
           image: "{{ .Values.prysm.image.repository }}:{{ .Values.prysm.image.tag }}"
           imagePullPolicy: {{ .Values.prysm.image.pullPolicy }}
           args:
-            - --datadir
+            - --wallet-dir
             - {{ .Values.datadir }}/validators/prysm
-            - --http-web3provider
+            - --wallet-password-file
+            - {{ .Values.datadir }}/password
+            - --beacon-rpc-provider
             - {{ .Values.eth2.provider }}
-            - --p2p-tcp-port
-            - {{ .Values.prysm.tcpPort | quote }}
-            - --p2p-udp-port
-            - {{ .Values.prysm.udpPort | quote }}
             - --monitoring-host
             - 0.0.0.0
             - --monitoring-port
