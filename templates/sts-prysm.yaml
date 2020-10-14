@@ -29,13 +29,13 @@ spec:
             - --http-web3provider
             - {{ .Values.eth2.provider }}
             - --p2p-tcp-port
-            - {{ .Values.prysm.tcpPort }}
+            - {{ .Values.prysm.tcpPort | quote }}
             - --p2p-udp-port
-            - {{ .Values.prysm.udpPort }}
+            - {{ .Values.prysm.udpPort | quote }}
             - --monitoring-host
-            - "0.0.0.0"
+            - 0.0.0.0
             - --monitoring-port
-            - {{ .Values.prysm.monitoringPort }}
+            - {{ .Values.prysm.monitoringPort | quote }}
             - --verbosity
             - {{ .Values.prysm.verbosity }}
             - --graffiti
