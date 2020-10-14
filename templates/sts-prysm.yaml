@@ -1,0 +1,55 @@
+{{- if and (eq .Values.eth2.prysm true) (eq .Values.eth2.lighthouse false) }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-prysm
+  labels:
+    smartnode: prysm
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      smartnode: prysm
+      {{- include "rocketpool.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "rocketpool.fullname" . }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        smartnode: prysm
+        {{- include "rocketpool.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-prysm
+          image: "{{ .Values.prysm.image.repository }}:{{ .Values.prysm.image.tag }}"
+          imagePullPolicy: {{ .Values.prysm.image.pullPolicy }}
+          args:
+            - --datadir
+            - {{ .Values.datadir }}/validators/prysm
+            - --http-web3provider
+            - {{ .Values.eth2.provider }}
+            - --p2p-tcp-port
+            - {{ .Values.prysm.tcpPort }}
+            - --p2p-udp-port
+            - {{ .Values.prysm.udpPort }}
+            - --monitoring-host
+            - 0.0.0.0
+            - --monitoring-port
+            - {{ .Values.prysm.monitoringPort }}
+            - --verbosity
+            - {{ .Values.prysm.verbosity }}
+            - --graffiti
+            - {{ .Values.prysm.graffiti }}
+          resources: 
+{{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.datadir }}
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.prysm.monitoringPort }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "rocketpool.fullname" . }}-data
+{{- end }}

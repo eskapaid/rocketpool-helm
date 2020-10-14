@@ -13,4 +13,4 @@ data:
             value: {{ .Values.eth1.infuraId }}
       eth2:
         client:
-          selected: lighthouse
+          selected: {{ if .Values.eth2.lighthouse }}lighthouse{{ else }}prysm{{ end }}

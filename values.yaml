@@ -6,6 +6,7 @@ image:
 
 storageAddress: 0xbbCbc87447fE120E1Bc73dBd11bc4Dc1086FFa25
 
+# has to be this right now
 datadir: /.rocketpool
 
 eth1:
@@ -14,6 +15,9 @@ eth1:
   infuraId: changeme
 
 eth2:
+  # pick one or the other and set the provider accordingly
+  lighthouse: true
+  prysm: false
   provider: http://eth2:8545
 
 storage:
@@ -30,14 +34,24 @@ resources:
 ports:
   metrics: 5052
 
-# Currently only Lighthouse + Infura is supported
-
-validator:
+lighthouse:
   image:
     repository: sigp/lighthouse
-    tag: v0.2.13
+    tag: latest
     pullPolicy: IfNotPresent
 
   debugLevel: info
   testnet: medalla
   graffiti: Lighthouse Validator
+
+prysm:
+  image:
+    repository: gcr.io/prysmaticlabs/prysm/validator
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  verbosity: info
+  tcpPort: 9001
+  udpPort: 9001
+  monitoringPort: 8081
+  graffiti: Prysm Validator
