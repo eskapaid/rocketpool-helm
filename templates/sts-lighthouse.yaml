@@ -37,6 +37,8 @@ spec:
             - {{ .Values.eth2.provider }}
             - --graffiti
             - {{ .Values.lighthouse.graffiti }}
+            - --init-slashing-protection
+            - --delete-lockfiles
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
