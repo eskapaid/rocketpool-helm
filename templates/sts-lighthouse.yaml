@@ -25,12 +25,10 @@ spec:
           imagePullPolicy: {{ .Values.lighthouse.image.pullPolicy }}
           command:
             - lighthouse
-            - validator_client
+            - validator
           args:
             - --datadir
             - {{ .Values.datadir }}/validators/lighthouse
-            - --secrets-dir
-            - {{ .Values.datadir }}/validators/lighthouse/secrets
             - --debug-level
             - {{ .Values.lighthouse.debugLevel }}
             - --testnet
