@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-proxy
-          image: "{{ .Values.image.repository }}-pow-proxy:{{ .Values.image.tag }}"
+          image: "{{ .Values.proxy.image.repository }}-pow-proxy:{{ .Values.proxy.image.tag }}"
           command: [ "/go/bin/rocketpool-pow-proxy" ]
           args:
             - --port

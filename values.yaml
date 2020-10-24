@@ -34,6 +34,12 @@ resources:
 ports:
   metrics: 5052
 
+proxy:
+  image:
+    repository: rocketpool/smartnode
+    tag: v0.0.3
+    pullPolicy: IfNotPresent
+
 lighthouse:
   image:
     repository: sigp/lighthouse
@@ -42,7 +48,7 @@ lighthouse:
 
   debugLevel: info
   testnet: medalla
-  graffiti: Lighthouse Validator
+  graffiti: guildwarz-rocket-pool
 
 prysm:
   image:
@@ -54,4 +60,4 @@ prysm:
   tcpPort: 9001
   udpPort: 9001
   monitoringPort: 8081
-  graffiti: Prysm Validator
+  graffiti: guildwarz-rocket-pool
