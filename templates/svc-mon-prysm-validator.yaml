@@ -1,0 +1,18 @@
+{{- if and (eq .Values.eth2.prysm true) (eq .Values.eth2.lighthouse false)}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-prysm
+  labels:
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      smartnode: prysm
+  endpoints:
+  - path: /metrics
+    port: metrics
+  namespaceSelector:
+    any: true
+  {{- end }}

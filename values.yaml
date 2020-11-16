@@ -34,11 +34,13 @@ resources:
 ports:
   metrics: 5052
 
+
 proxy:
   image:
     repository: rocketpool/smartnode
     tag: v0.0.3
     pullPolicy: IfNotPresent
+
 
 lighthouse:
   image:
@@ -49,6 +51,7 @@ lighthouse:
   debugLevel: info
   testnet: medalla
   graffiti: guildwarz-rocket-pool
+
 
 prysm:
   image:
