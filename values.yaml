@@ -35,6 +35,9 @@ ports:
   metrics: 5052
 
 
+api:
+  datadir: /root/.rocketpool
+
 proxy:
   image:
     repository: rocketpool/smartnode

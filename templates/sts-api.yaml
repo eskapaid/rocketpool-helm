@@ -43,12 +43,12 @@ spec:
           #   timeoutSeconds: 5
           volumeMounts:
             - name: data
-              mountPath: {{ .Values.datadir }}
+              mountPath: {{ .Values.api.datadir }}
             - name: config
-              mountPath: {{ .Values.datadir }}/config.yml
+              mountPath: {{ .Values.api.datadir }}/config.yml
               subPath: config.yml
             - name: settings
-              mountPath: {{ .Values.datadir }}/settings.yml
+              mountPath: {{ .Values.api.datadir }}/settings.yml
               subPath: settings.yml
           ports:
             - name: metrics
