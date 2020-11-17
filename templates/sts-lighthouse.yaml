@@ -34,7 +34,7 @@ spec:
             - --testnet
             - {{ .Values.lighthouse.testnet }}
             - --beacon-node
-            - {{ .Values.eth2.provider }}
+            - http://{{ .Values.eth2.provider }}
             - --graffiti
             - {{ .Values.lighthouse.graffiti }}
             - --init-slashing-protection

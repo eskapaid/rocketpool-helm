@@ -1,7 +1,7 @@
 
 image:
   repository: rocketpool/smartnode
-  tag: v0.0.3
+  tag: v0.0.7
   pullPolicy: IfNotPresent
 
 storageAddress: 0xbbCbc87447fE120E1Bc73dBd11bc4Dc1086FFa25
@@ -18,7 +18,8 @@ eth2:
   # pick one or the other and set the provider accordingly
   lighthouse: true
   prysm: false
-  provider: http://eth2:8545
+  # specify without "http://" because Prysm doesn't use http
+  provider: eth2:8545
 
 storage:
   capacity: 1Gi
