@@ -35,6 +35,19 @@ resources:
 ports:
   metrics: 5052
 
+cli:
+  image:
+    repository: eskp/rocketpool-cli
+    tag: latest
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
 
 proxy:
   image:
