@@ -31,8 +31,8 @@ spec:
             - {{ .Values.datadir }}/validators/lighthouse
             - --debug-level
             - {{ .Values.lighthouse.debugLevel }}
-            - --testnet
-            - {{ .Values.lighthouse.testnet }}
+            - --network
+            - {{ .Values.lighthouse.network }}
             - --beacon-node
             - http://{{ .Values.eth2.provider }}
             - --graffiti

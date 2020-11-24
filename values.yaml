@@ -1,10 +1,10 @@
 
 image:
   repository: rocketpool/smartnode
-  tag: v0.0.7
+  tag: v0.0.8
   pullPolicy: IfNotPresent
 
-storageAddress: 0xbbCbc87447fE120E1Bc73dBd11bc4Dc1086FFa25
+storageAddress: 0xA85A8022E8F28E49B8BBfb792f93ee914B342C3b
 
 # has to be this right now
 datadir: /.rocketpool
@@ -38,7 +38,7 @@ ports:
 cli:
   image:
     repository: eskp/rocketpool-cli
-    tag: latest
+    tag: stable
     pullPolicy: IfNotPresent
 
   resources:
@@ -59,22 +59,22 @@ proxy:
 lighthouse:
   image:
     repository: sigp/lighthouse
-    tag: latest
+    tag: stable
     pullPolicy: IfNotPresent
 
   debugLevel: info
-  testnet: medalla
-  graffiti: guildwarz-rocket-pool
+  network: pyrmont
+  graffiti: rocket-pool
 
 
 prysm:
   image:
     repository: gcr.io/prysmaticlabs/prysm/validator
-    tag: latest
+    tag: stable
     pullPolicy: IfNotPresent
 
   verbosity: info
   tcpPort: 9001
   udpPort: 9001
   monitoringPort: 8081
-  graffiti: guildwarz-rocket-pool
+  graffiti: rocket-pool
