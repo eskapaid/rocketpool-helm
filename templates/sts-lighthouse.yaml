@@ -38,7 +38,9 @@ spec:
             - --graffiti
             - {{ .Values.lighthouse.graffiti }}
             - --init-slashing-protection
-            - --delete-lockfiles
+            - --metrics
+            - --metrics-address
+            - "0.0.0.0"
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
