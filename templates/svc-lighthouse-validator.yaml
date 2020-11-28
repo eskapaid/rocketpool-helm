@@ -1,16 +1,16 @@
-{{- if and (eq .Values.eth2.prysm true) (eq .Values.eth2.lighthouse false)}}
+{{- if and (eq .Values.eth2.lighthouse true) (eq .Values.eth2.prysm false)}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "rocketpool.fullname" . }}-prysm
+  name: {{ include "rocketpool.fullname" . }}-lighthouse
   labels:
     {{- include "rocketpool.selectorLabels" . | nindent 4 }}
-    smartnode: prysm
+    smartnode: lighthouse
 spec:
   selector:
     {{- include "rocketpool.selectorLabels" . | nindent 4 }}
   ports:
     - protocol: TCP
-      port: {{ .Values.prysm.monitoringPort }}
+      port: {{ .Values.lighthouse.ports.metrics }}
       name: metrics
 {{- end }}

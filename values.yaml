@@ -66,6 +66,9 @@ lighthouse:
   network: pyrmont
   graffiti: rocket-pool
 
+  ports:
+    metrics: 5064
+
 
 prysm:
   image:
