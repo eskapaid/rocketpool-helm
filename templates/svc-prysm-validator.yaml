@@ -12,6 +12,6 @@ spec:
     smartnode: prysm
   ports:
     - protocol: TCP
-      port: {{ .Values.prysm.monitoringPort }}
+      port: {{ .Values.prysm.ports.metrics }}
       name: metrics
 {{- end }}

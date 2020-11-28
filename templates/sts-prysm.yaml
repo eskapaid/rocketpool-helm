@@ -33,7 +33,7 @@ spec:
             - --monitoring-host
             - 0.0.0.0
             - --monitoring-port
-            - {{ .Values.prysm.monitoringPort | quote }}
+            - {{ .Values.prysm.ports.metrics | quote }}
             - --verbosity
             - {{ .Values.prysm.verbosity }}
             - --graffiti
@@ -45,7 +45,7 @@ spec:
               mountPath: {{ .Values.datadir }}
           ports:
             - name: metrics
-              containerPort: {{ .Values.prysm.monitoringPort }}
+              containerPort: {{ .Values.prysm.ports.metrics }}
       volumes:
         - name: data
           persistentVolumeClaim:

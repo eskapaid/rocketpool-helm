@@ -77,7 +77,7 @@ prysm:
     pullPolicy: IfNotPresent
 
   verbosity: info
-  tcpPort: 9001
-  udpPort: 9001
-  monitoringPort: 8081
   graffiti: rocket-pool
+
+  ports:
+    metrics: 8081
