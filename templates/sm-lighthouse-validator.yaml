@@ -4,7 +4,7 @@ kind: ServiceMonitor
 metadata:
   name: {{ include "rocketpool.fullname" . }}-lighthouse
   labels:
-    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    {{- include "rocketpool.labels" . | nindent 4 }}
     release: kube-prometheus-stack
 spec:
   selector:

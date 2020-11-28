@@ -9,6 +9,7 @@ metadata:
 spec:
   selector:
     {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    smartnode: lighthouse
   ports:
     - protocol: TCP
       port: {{ .Values.lighthouse.ports.metrics }}
