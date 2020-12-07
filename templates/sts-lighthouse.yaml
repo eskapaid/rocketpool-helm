@@ -48,7 +48,7 @@ spec:
               mountPath: {{ .Values.datadir }}
           ports:
             - name: metrics
-              containerPort: 5052
+              containerPort: {{ .Values.lighthouse.ports.metrics }}
       volumes:
         - name: data
           persistentVolumeClaim:

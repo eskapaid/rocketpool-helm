@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-watchtower
+  labels:
+    smartnode: watchtower
+    {{- include "rocketpool.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      smartnode: watchtower
+      {{- include "rocketpool.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "rocketpool.fullname" . }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        smartnode: watchtower
+        {{- include "rocketpool.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-watchtower
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: [ "/go/bin/rocketpool" ]
+          args: [ "watchtower" ]
+          resources: 
+{{ toYaml .Values.resources | indent 12 }}
+          # livenessProbe:
+          #   httpGet:
+          #     path: /node/health
+          #     port: {{ .Values.ports.metrics }}
+          #   failureThreshold: 60
+          #   initialDelaySeconds: 600
+          #   periodSeconds: 60
+          #   timeoutSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /node/health
+          #     port: {{ .Values.ports.metrics }}
+          #   failureThreshold: 3
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          volumeMounts:
+            - name: data
+              mountPath: {{ .Values.datadir }}
+            - name: config
+              mountPath: {{ .Values.datadir }}/config.yml
+              subPath: config.yml
+            - name: settings
+              mountPath: {{ .Values.datadir }}/settings.yml
+              subPath: settings.yml
+          ports:
+            - name: metrics
+              containerPort: {{ .Values.ports.metrics }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "rocketpool.fullname" . }}-data
+        - name: config
+          configMap:
+            name: {{ include "rocketpool.fullname" . }}-config
+        - name: settings
+          configMap:
+            name: {{ include "rocketpool.fullname" . }}-settings
