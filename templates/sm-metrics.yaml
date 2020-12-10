@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-metrics
+  labels:
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      smartnode: metrics
+  endpoints:
+  - path: /metrics
+    port: metrics
+  namespaceSelector:
+    any: true

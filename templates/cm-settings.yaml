@@ -7,10 +7,12 @@ data:
     chains:
       eth1:
         client:
-          selected: infura
+          selected: {{ if .Values.eth1.proxy }}infura{{ else }}geth{{ end }}
+{{ if .Values.eth1.proxy }}
           params:
           - env: INFURA_PROJECT_ID
             value: {{ .Values.eth1.infuraId }}
+{{ end }}
       eth2:
         client:
           selected: {{ if .Values.eth2.lighthouse }}lighthouse{{ else }}prysm{{ end }}

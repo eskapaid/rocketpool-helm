@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "rocketpool.fullname" . }}-metrics
+  labels:
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    smartnode: metrics
+spec:
+  selector:
+    {{- include "rocketpool.selectorLabels" . | nindent 4 }}
+    smartnode: metrics
+  ports:
+    - protocol: TCP
+      port: 2112
+      name: metrics
