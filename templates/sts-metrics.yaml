@@ -20,11 +20,12 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-metrics
-          image: "eskp/rocketpool-metrics"
+          image: "{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}"
+          imagePullPolicy: {{ .Values.metrics.image.pullPolicy }}
           command: [ "/go/bin/rocketpool" ]
           args: [ "metrics" ]
           resources: 
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.metrics.resources | indent 12 }}
           # livenessProbe:
           #   httpGet:
           #     path: /node/health
