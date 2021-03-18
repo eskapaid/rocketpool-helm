@@ -38,6 +38,7 @@ spec:
             - {{ .Values.prysm.verbosity }}
             - --graffiti
             - {{ .Values.prysm.graffiti }}
+            - --accept-terms-of-use
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
