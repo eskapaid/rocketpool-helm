@@ -29,13 +29,7 @@ spec:
             - --network
             - goerli
             - --projectId
-            - $(INFURA_PROJECT_ID)
-          env:
-          - name: INFURA_PROJECT_ID
-            valueFrom:
-              secretKeyRef:
-                name: rocketpool-infura-id
-                key: infura-id
+            - {{ .Values.eth1.infuraId }}
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           # livenessProbe:
