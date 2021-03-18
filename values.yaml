@@ -1,16 +1,18 @@
 
 image:
   repository: rocketpool/smartnode
-  tag: v0.0.9
+  tag: v1.0.0-beta.0
   pullPolicy: IfNotPresent
 
-storageAddress: 0xA85A8022E8F28E49B8BBfb792f93ee914B342C3b
+storageAddress: 0xDeE7ec57E6b9f7F9A27e68821F3763e9d2537096
+rplFaucetAddress: 0x6aC372F4bd37b9588D7eAb93A67E304421E26E48
 
 # has to be this right now
 datadir: /.rocketpool
 
 eth1:
   provider: http://eth1:8545
+  wsProvider: ws://eth1:8546
   proxy: true
   infuraId: changeme
 
