@@ -39,6 +39,7 @@ spec:
             - --graffiti
             - {{ .Values.prysm.graffiti }}
             - --accept-terms-of-use
+            - --{{ .Values.prysm.network }}
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:

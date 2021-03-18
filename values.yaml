@@ -93,6 +93,7 @@ prysm:
     pullPolicy: IfNotPresent
 
   verbosity: info
+  network: pyrmont
   graffiti: rocket-pool
 
   ports:
