@@ -1,3 +1,5 @@
+{{- if and (eq .Values.metrics.enabled true) (eq .Values.servicemonitor.enabled true) }}
+
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -14,3 +16,5 @@ spec:
     port: metrics
   namespaceSelector:
     any: true
+
+{{- end }}

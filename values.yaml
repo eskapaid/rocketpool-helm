@@ -1,4 +1,3 @@
-
 image:
   repository: rocketpool/smartnode
   tag: v1.0.0-beta.0
@@ -98,3 +97,7 @@ prysm:
 
   ports:
     metrics: 8081
+
+# Will create ServiceMonitor objects for Prometheus Operator
+servicemonitor:
+  enabled: false
