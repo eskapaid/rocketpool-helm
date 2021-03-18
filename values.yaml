@@ -17,7 +17,7 @@ eth1:
 
 eth2:
   # pick one or the other and set the provider accordingly
-  lighthouse: true
+  lighthouse: false
   prysm: false
   # specify without "http://" because Prysm doesn't use http
   provider: eth2:8545
