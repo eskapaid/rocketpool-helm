@@ -38,6 +38,7 @@ ports:
   metrics: 5052
 
 metrics:
+  enabled: false
   image:
     repository: eskp/rocketpool-metrics
     tag: latest
