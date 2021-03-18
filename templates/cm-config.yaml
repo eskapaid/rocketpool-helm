@@ -9,7 +9,7 @@ data:
       rplFaucetAddress: {{ .Values.rplFaucetAddress }}
     smartnode:
       projectName: rocketpool
-      image: {{ .Values.image }}:{{ .Values.tag }}
+      image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
       passwordPath: {{ .Values.datadir }}/password
       walletPath: {{ .Values.datadir }}/wallet
       validatorKeychainPath: {{ .Values.datadir }}/validators
