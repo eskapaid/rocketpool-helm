@@ -1,4 +1,4 @@
-{{- if .Values.eth1.proxy }}
+{{- if .Values.proxy.enabled }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
