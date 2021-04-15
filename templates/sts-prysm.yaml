@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: {{ .Values.prysm.image.pullPolicy }}
           args:
             - --wallet-dir
-            - {{ .Values.datadir }}/validators/prysm
+            - {{ .Values.datadir }}/validators/prysm-non-hd
             - --wallet-password-file
             - {{ .Values.datadir }}/password
             - --beacon-rpc-provider
