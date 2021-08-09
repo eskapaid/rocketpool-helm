@@ -21,15 +21,19 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-proxy
-          image: "{{ .Values.proxy.image.repository }}-pow-proxy:{{ .Values.proxy.image.tag }}"
+          image: "{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.tag }}"
           command: [ "/go/bin/rocketpool-pow-proxy" ]
           args:
-            - --port
+            - --httpPort
             - "8545"
+            - --wsPort
+            - "8546"
             - --network
             - {{ .Values.eth1.network }}
             - --projectId
             - {{ .Values.eth1.infuraId }}
+            - --providerType
+            - "infura"
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           # livenessProbe:
