@@ -1,4 +1,4 @@
-{{- if .Values.proxy.enabled }}
+{{- if .Values.eth1.proxy }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,7 +11,10 @@ spec:
     smartnode: proxy
     {{- include "rocketpool.selectorLabels" . | nindent 4 }}
   ports:
-    - name: proxy
+    - name: http
       port: 8545
+      protocol: TCP
+    - name: ws
+      port: 8546
       protocol: TCP
 {{- end }}
