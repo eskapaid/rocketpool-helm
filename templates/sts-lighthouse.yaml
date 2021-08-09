@@ -32,7 +32,7 @@ spec:
             - --debug-level
             - {{ .Values.lighthouse.debugLevel }}
             - --network
-            - {{ .Values.lighthouse.network }}
+            - {{ .Values.eth2.network }}
             - --beacon-node
             - http://{{ .Values.eth2.provider }}
             - --graffiti

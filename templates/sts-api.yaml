@@ -21,8 +21,8 @@ spec:
       containers:
         - name: {{ .Chart.Name }}-api
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          command: [ "/bin/bash", "-c", "--" ]
-          args: [ "/bin/sleep infinity" ]
+          command: [ "/bin/sleep" ]
+          args: [ "infinity" ]
           resources: 
 {{ toYaml .Values.resources | indent 12 }}
           # livenessProbe:
