@@ -7,6 +7,8 @@ data:
     rocketpool:
       storageAddress: {{ .Values.storageAddress }}
       rplFaucetAddress: {{ .Values.rplFaucetAddress }}
+      oneInchOracleAddress: {{ .Values.oneInchOracleAddress }}
+      rplTokenAddress: {{ .Values.rplTokenAddress }}
     smartnode:
       projectName: rocketpool
       image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -15,16 +17,20 @@ data:
       validatorKeychainPath: {{ .Values.datadir }}/validators
       validatorRestartCommand: "$HOME/.rocketpool/chains/eth2/restart-validator.sh"
       gasPrice: 0 # desired gas price in gwei, zero for recommended price
+      rplClaimGasThreshold: 150 # Automatic RPL reward claims will wait until the network's average gas price, in gwei, is below this limit.
+                                # Set it to 0 to disable automatic claiming of RPL rewards entirely.
+      txWatchUrl: https://goerli.etherscan.io/tx
     chains:
       eth1:
         provider: {{ .Values.eth1.provider }}
-        wasProvider: {{ .Values.eth1.wsProvider }}
+        wsProvider: {{ .Values.eth1.wsProvider }}
+        mainnetProvider: {{ .Values.eth1.provider }}
         chainID: 5 # goerli chain
         client:
           options:
           - id: geth
             name: Geth
-            image: ethereum/client-go:v1.10.1
+            image: ethereum/client-go:v1.10.6
             desc: "\tGeth is one of the three original implementations of the\n
               \t\tEthereum protocol. It is written in Go, fully open source and\n
               \t\tlicensed under the GNU LGPL v3."
