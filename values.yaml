@@ -12,11 +12,14 @@ rplTokenAddress: 0xb4efd85c19999d84251304bda99e90b92300bd93
 datadir: /.rocketpool
 
 eth1:
+  network: goerli
   provider: http://eth1:8545
   wsProvider: ws://eth1:8546
   infuraId: changeme
+  proxy: false
 
 eth2:
+  network: prater
   # pick one or the other and set the provider accordingly
   lighthouse: false
   prysm: false
@@ -67,10 +70,9 @@ cli:
       memory: 256Mi
 
 proxy:
-  enabled: false
   image:
-    repository: rocketpool/smartnode
-    tag: v0.0.3
+    repository: rocketpool/smartnode-pow-proxy
+    tag: v1.0.0-rc5
     pullPolicy: IfNotPresent
 
 
@@ -79,11 +81,8 @@ lighthouse:
     repository: sigp/lighthouse
     tag: stable
     pullPolicy: IfNotPresent
-
   debugLevel: info
-  network: pyrmont
   graffiti: rocket-pool
-
   ports:
     metrics: 5064
 
@@ -95,7 +94,6 @@ prysm:
     pullPolicy: IfNotPresent
 
   verbosity: info
-  network: pyrmont
   graffiti: rocket-pool
 
   ports:

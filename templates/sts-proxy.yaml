@@ -1,4 +1,4 @@
-{{- if .Values.proxy.enabled }}
+{{- if .Values.eth1.proxy }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -27,7 +27,7 @@ spec:
             - --port
             - "8545"
             - --network
-            - goerli
+            - {{ .Values.eth1.network }}
             - --projectId
             - {{ .Values.eth1.infuraId }}
           resources: 
