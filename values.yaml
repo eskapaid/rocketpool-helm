@@ -75,18 +75,6 @@ proxy:
     tag: v1.0.0-rc5
     pullPolicy: IfNotPresent
 
-
-lighthouse:
-  image:
-    repository: sigp/lighthouse
-    tag: stable
-    pullPolicy: IfNotPresent
-  debugLevel: info
-  graffiti: rocket-pool
-  ports:
-    metrics: 5064
-
-
 prysm:
   image:
     repository: gcr.io/prysmaticlabs/prysm/validator
